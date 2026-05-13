@@ -4,8 +4,6 @@
 
 Este projeto consiste em uma suíte de testes automatizados de ponta a ponta (E2E) para o sistema **Inventário CTI**. O objetivo é garantir a integridade das operações críticas, como o ciclo de vida de ativos de TI, atribuições e geração de relatórios.
 
-O desafio foca na validação de 5 Histórias de Usuário, cobrindo fluxos positivos e negativos com foco em qualidade e manutenibilidade de código.
-
 ## 🛠️ Tecnologias
 
 As seguintes ferramentas foram utilizadas na construção do projeto:
@@ -16,15 +14,15 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 
 ## 🏗️ Arquitetura
 
-O projeto utiliza o padrão **Page Object Model (POM)**. 
+O projeto utiliza o padrão **Page Object Model**. 
 
 ## 📂 Estrutura do Projeto
 
 ```text
 ├── cypress/
-│   ├── e2e/             # Cenários de teste (Specs)
+│   ├── e2e/             # Cenários de teste
 │   ├── support/
-│   │   ├── pages/       # Classes com os elementos e ações (POM)
+│   │   ├── pages/       # Classes com os elementos e ações
 │   │   └── commands.js  # Comandos customizados
 │   ├── fixtures/        # Massas de dados para os testes
 ├── docs/                # Plano de Teste e documentação adicional
@@ -44,7 +42,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 Clone o repositório:
 
 ```bash
-git clone [https://github.com/SamirMamede/pge-ce-inventario-cti-automation.git](https://github.com/SamirMamede/pge-ce-inventario-cti-automation.git)
+git clone https://github.com/SamirMamede/pge-ce-inventario-cti-automation.git
 ```
 
 Instale as dependências:

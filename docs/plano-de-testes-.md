@@ -4,12 +4,12 @@
 Este documento detalha a estratégia de teste para a validação das funcionalidades core do sistema Inventário CTI. O foco está em garantir que o ciclo de vida dos ativos e as atribuições de equipamentos funcionem conforme as regras de negócio estabelecidas.
 
 ## 2. Escopo dos Testes
-Serão automatizadas as seguintes Histórias de Usuário (US):
-* **US01:** Cadastro de Ativo (Fluxo positivo e campos obrigatórios).
-* **US02:** Edição de Ativo (Alteração de status e metadados).
-* **US03:** Atribuição de Ativo a Colaborador (Vínculo e regras de disponibilidade).
-* **US04:** Devolução de Ativo (Desvinculação e atualização de status).
-* **US05:** Relatório de Movimentação (Filtros e geração de PDF).
+Serão automatizadas as seguintes Histórias de Usuário:
+* **US01:** Cadastro de Ativo.
+* **US02:** Edição de Ativo.
+* **US03:** Atribuição de Ativo a Colaborador.
+* **US04:** Devolução de Ativo.
+* **US05:** Relatório de Movimentação.
 
 ## 3. Ferramentas e Tecnologias
 * **Framework de Automação:** Cypress
@@ -40,29 +40,37 @@ Serão automatizadas as seguintes Histórias de Usuário (US):
 * **URL:** [http://testeqa.pge.ce.gov.br/](http://testeqa.pge.ce.gov.br/)
 * **Navegador:** Google Chrome.
 
-## 7. Cenários de Teste
+## 7. Detalhamento dos Cenários de Teste
 
 ### US01: Cadastro de Atribuições
-* **Cenário 01:** Cadastro completo vinculando um ativo a um colaborador com modalidade "Home Office" e Pacote Office habilitado.
+* **Cenário 01:** Cadastro vinculando múltiplos ativos a um colaborador com modalidade "Home Office" e Pacote Office habilitado, validando a mensagem de confirmação de sucesso após salvar.
 * **Cenário 02:** Cadastro de atribuição exclusiva para uma Subárea sem colaborador definido.
-* **Cenário 03:** Tentar salvar sem preencher campos obrigatórios (*) e validar mensagens de erro.
-* **Cenário 04:** Validar que o campo "Pacote Office" só fica disponível se a checkbox "Utilizará Pacote Office?" estiver marcada.
-* **Cenário 05:** Validar que o botão "Cancelar" descarta as informações preenchidas sem salvar.
+* **Cenário 03:** Tentar salvar sem preencher campos obrigatórios (*) e validar se o sistema impede a operação exibindo mensagens de erro específicas.
+* **Cenário 04:** Validar que o campo de seleção "Pacote Office" permanece condicionado (habilitado/visível) apenas à marcação da checkbox "Utilizará Pacote Office?".
+* **Cenário 05:** Validar que o botão "Cancelar" descarta as informações preenchidas sem persistir dados no inventário.
 
 ### US02: Editar Atribuições
-* **Cenário 01:** Validar se todos os campos da atribuição carregam os dados corretamente ao clicar em "Editar".
-* **Cenário 02:** Remover um ativo selecionando "COM DEFEITO", informar o motivo e adicionar um novo ativo substituto.
-* **Cenário 03:** Modificar a área/modalidade de uma atribuição existente e validar a persistência da atualização.
-* **Cenário 04:** Validar a remoção de um ativo específico da lista de atribuições através do botão "Remover".
+* **Cenário 01:** Validar se todos os campos carregam os dados corretamente ao clicar em "Editar".
+* **Cenário 02:** Remover um ativo selecionando o status "COM DEFEITO", informar o motivo e adicionar um novo ativo substituto.
+* **Cenário 03:** Realizar a troca de um ativo funcional selecionando status "DISPONÍVEL" antes da remoção.
+* **Cenário 04:** Modificar a Área/Subárea de uma atribuição e validar a atualização na listagem principal.
+* **Cenário 05:** Tentar salvar uma edição removendo o conteúdo de um campo obrigatório (*) e validar se o sistema bloqueia a atualização.
 
 ### US03: Geração de Termos
-* **Cenário 01:** Validar que a seleção entre os tipos "Responsabilidade" e "Empréstimo" é mutuamente exclusiva.
-* **Cenário 02:** Gerar Termo de Responsabilidade e validar a abertura do documento em PDF.
-* **Cenário 03:** Validar se o PDF contém o nome do colaborador, área e a lista de ativos vinculados.
+* **Cenário 01:** Validar que a seleção entre "Responsabilidade" e "Empréstimo" é mutuamente exclusiva.
+* **Cenário 02:** Gerar Termo de Responsabilidade e validar a produção do documento PDF.
+* **Cenário 03:** Validar se o documento contém Nome, Área, Lista de Ativos e campo para CPF.
 * **Cenário 04:** Validar o fechamento do modal de termos através do ícone "X".
+* **Cenário 05:** Tentar clicar em "Gerar" sem selecionar nenhum tipo de termo e validar o comportamento do sistema.
 
-### US04 e US05: Relatórios de Movimentação e Atribuição
-* **Cenário 01:** Realizar pesquisa por Área e Período, validando a atualização da listagem em tela.
-* **Cenário 02:** Validar se os resultados em tela são agrupados por área, exibindo data e quantidade de movimentações.
-* **Cenário 03:** Validar mensagem informativa quando não existem dados para o filtro selecionado.
-* **Cenário 04:** Clicar em "Gerar Relatório" e validar se o PDF mantém a mesma estrutura visual da tela.
+### US04: Relatório de Movimentação de Ativos
+* **Cenário 01:** Realizar pesquisa por Área e Período, validando a atualização da listagem.
+* **Cenário 02:** Validar se os resultados são agrupados por área e exibem a quantidade correta de movimentações.
+* **Cenário 03:** Gerar relatório PDF e validar se o documento abre em nova aba respeitando a estrutura da tela.
+* **Cenário 04:** Validar a exibição da mensagem informativa "não há dados disponíveis" ao filtrar um período ou área sem movimentações.
+
+### US05: Relatório de Atribuições por Área
+* **Cenário 01:** Validar a atualização da listagem de atribuições ao alternar entre diferentes Áreas.
+* **Cenário 02:** Validar se Tombo, Série e Descrição estão presentes na listagem e no relatório gerado.
+* **Cenário 03:** Validar mensagem informativa "não há dados disponíveis" para filtros sem ocorrências.
+* **Cenário 04:** Tentar pesquisar utilizando um período inválido e validar o tratamento de erro do sistema.
