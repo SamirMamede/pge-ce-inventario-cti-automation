@@ -1,2 +1,61 @@
 # pge-ce-inventario-cti-automation
-Suíte completa de testes automatizados utilizando Cypress para  validar as principais funcionalidades do sistema Inventário CTI.
+
+## 💻 Sobre o projeto
+
+Este projeto consiste em uma suíte de testes automatizados de ponta a ponta (E2E) para o sistema **Inventário CTI**. O objetivo é garantir a integridade das operações críticas, como o ciclo de vida de ativos de TI, atribuições e geração de relatórios.
+
+O desafio foca na validação de 5 Histórias de Usuário, cobrindo fluxos positivos e negativos com foco em qualidade e manutenibilidade de código.
+
+## 🛠️ Tecnologias
+
+As seguintes ferramentas foram utilizadas na construção do projeto:
+
+* **Framework:** [Cypress](https://www.cypress.io/)
+* **Linguagem:** [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+* **Ambiente de Execução:** [Node.js](https://nodejs.org/)
+
+## 🏗️ Arquitetura
+
+O projeto utiliza o padrão **Page Object Model (POM)**. 
+
+## 📂 Estrutura do Projeto
+
+```text
+├── cypress/
+│   ├── e2e/             # Cenários de teste (Specs)
+│   ├── support/
+│   │   ├── pages/       # Classes com os elementos e ações (POM)
+│   │   └── commands.js  # Comandos customizados
+│   ├── fixtures/        # Massas de dados para os testes
+├── docs/                # Plano de Teste e documentação adicional
+└── cypress.config.js    # Configurações globais do framework
+```
+
+## 🛠️ Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+
+* [Node.js](https://nodejs.org/en/) (Versão utilizada: `v22.14.0` ou superior)
+* [npm](https://www.npmjs.com/) (Versão utilizada: `10.2.5` ou superior)
+* Um editor de código
+
+## 🚀 Como executar
+
+Clone o repositório:
+
+```bash
+git clone [https://github.com/SamirMamede/pge-ce-inventario-cti-automation.git](https://github.com/SamirMamede/pge-ce-inventario-cti-automation.git)
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Configuração de Ambiente:
+ - Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira suas credenciais.
+
+Execução:
+ - Modo Interativo (Interface): `npx cypress open`
+ - Modo Headless (Console): `npx cypress run`
