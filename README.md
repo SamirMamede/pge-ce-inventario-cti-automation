@@ -54,6 +54,19 @@ npm install
 Configuração de Ambiente:
  - Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira suas credenciais.
 
+## 🛠️ Configuração de Dados Dinâmicos
+
+Para rodar o `Cenário 01` da `US01: Cadastro de Atribuições`, é necessário configurar o arquivo cypress.env.json na raiz do projeto. Isso evita que o teste falhe por tentar utilizar ativos que já foram vinculados por outros usuários ou testes anteriores. Exemplo de cypress.env.json:
+
+```json
+{
+"tombo_disponivel_1": "15723",
+"tombo_disponivel_2": "15570"
+}
+```
+
+Consulte o arquivo `cypress.env.json.example` para o template completo.
+
 Execução:
  - Modo Interativo (Interface): `npx cypress open`
  - Modo Headless (Console): `npx cypress run`
