@@ -38,10 +38,10 @@ class AtribuicaoPage {
     if (dados.obs) this.fieldObservacoes.type(dados.obs);
   }
 
-selecionarAtivo(tombo) {
-  cy.get('.select2-selection').last().click({ force: true });
-  cy.get('.select2-search__field').type(`${tombo}{enter}`);
-}
+  selecionarAtivo(tombo) {
+    cy.get('.select2-selection').last().click({ force: true });
+    cy.get('.select2-search__field').type(`${tombo}{enter}`);
+  }
 
   validarDadosAtivo(descricao) {
     this.fieldDescricaoAtivo.should('not.be.empty');
@@ -51,12 +51,49 @@ selecionarAtivo(tombo) {
   }
 
   clicarAdicionarAtivo() {
-  this.btnAtribuirAtivo.scrollIntoView().should('be.visible').click({ force: true });
-}
+    this.btnAtribuirAtivo.scrollIntoView().should('be.visible').click({ force: true });
+  }
 
   clicarEmSalvar() {
     this.btnSalvar.scrollIntoView().click({ force: true });
   }
+
+  validarDadosCarregados(dados) {
+    cy.get('.card-header').should('contain.text', 'Atualizando Atribuição');
+
+    this.selectArea.should('contain', dados.area);
+    this.selectSubarea.should('contain', dados.subarea); 
+    this.fieldAtendidoPor.should('have.value', dados.atendidoPor);
+
+    if (dados.modalidade === 'Home Office') {
+        this.radioHomeOffice.should('be.checked');
+    } else {
+        this.radioPresencial.should('be.checked');
+    }
+
+    if (dados.so) this.selectSO.should('contain', dados.so);
+    if (dados.obs) this.fieldObservacoes.should('have.value', dados.obs);
+  }
+
+  clicarPrimeiroEditar() {
+    const btnEditar = cy.get('table tbody tr').first().find('td').eq(11).find('a').first();
+
+    btnEditar.click({ force: true });
+    cy.url().should('include', '/edit'); 
+  }
+
+  validarAtivosVinculados(tombosEsperados) {
+      cy.get('#bond_asset', { timeout: 10000 }).should('be.visible');
+
+      const listaTombos = Array.isArray(tombosEsperados) ? tombosEsperados : [tombosEsperados];
+
+      listaTombos.forEach((tombo) => {
+          cy.contains('#bond_asset .nested-fields', tombo).should('be.visible').within(() => {
+                cy.get('input[name*="[description]"], textarea[name*="[description]"]').should('not.be.empty');
+                cy.get('select[name*="[status_id]"] option:selected').should('contain.text', 'VÍNCULADO EM USO'); 
+            });
+      });
+  } 
 }
 
 export default new AtribuicaoPage();
