@@ -66,9 +66,7 @@ describe('US01: Cadastro de Atribuições', () => {
 
   it('Cenário 03: Validar impedimento de salvar sem campos obrigatórios', () => {
     AtribuicaoPage.clicarEmSalvar();
-    AtribuicaoPage.selectArea
-    .invoke('prop', 'validationMessage')
-    .should('be.oneOf', ['Selecione um item da lista.', 'Please select an item in the list.']); 
+    AtribuicaoPage.selectArea.invoke('prop', 'validationMessage').should('be.oneOf', ['Selecione um item da lista.', 'Please select an item in the list.']); 
   });
 
 it('Cenário 04: Validar que o campo Pacote Office é condicional', () => {

@@ -95,10 +95,15 @@ class AtribuicaoPage {
       });
   }
 
-  substituirAtivoComDefeito(tomboAntigo, tomboNovo, motivo, atendente) {
+  substituirAtivo(tomboAntigo, tomboNovo, novoStatus, motivo = null) {
         cy.contains('#bond_asset .nested-fields', tomboAntigo).within(() => {
-            cy.get('select[name*="[status_id]"]').select('COM DEFEITO');
-            cy.get('input[name*="[observation]"], textarea[name*="[observation]"]').type(motivo);
+
+            cy.get('select[name*="[status_id]"]').select(novoStatus);
+            
+            if (motivo) {
+                cy.get('input[name*="[observation]"], textarea[name*="[observation]"]').type(motivo);
+            }
+            
             cy.get('.btn-danger, .btn-remove').click(); 
         });
 
@@ -109,7 +114,16 @@ class AtribuicaoPage {
         cy.get('.select2-search__field').should('be.visible').type(`${tomboNovo}{enter}`);
         cy.get('#bond_asset').should('contain', tomboNovo);
         cy.get('select[name*="[status_id]"]').last().select('VÍNCULADO EM USO');
+  }
 
+    alterarAreaESubarea(novaArea, novaSubarea) {
+        this.selectArea.select(novaArea);
+        this.selectSubarea.select(novaSubarea);
+    }
+
+    validarPrimeiraLinhaTabela(areaEsperada, subareaEsperada) {
+        cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain.text', areaEsperada);
+        cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain.text', subareaEsperada);
     }
 }
 
