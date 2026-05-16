@@ -58,11 +58,11 @@ Serão automatizadas as seguintes Histórias de Usuário:
 * **Cenário 05:** Tentar salvar uma edição removendo o conteúdo de um campo obrigatório (*) e validar se o sistema bloqueia a atualização.
 
 ### US03: Geração de Termos
-* **Cenário 01:** Validar que a seleção entre "Responsabilidade" e "Empréstimo" é mutuamente exclusiva.
-* **Cenário 02:** Gerar Termo de Responsabilidade e validar a produção do documento PDF.
-* **Cenário 03:** Validar se o documento contém Nome, Área, Lista de Ativos e campo para CPF.
-* **Cenário 04:** Validar o fechamento do modal de termos através do ícone "X".
-* **Cenário 05:** Tentar clicar em "Gerar" sem selecionar nenhum tipo de termo e validar o comportamento do sistema.
+* **Cenário 01:** Validar comportamento de exclusão mútua dos checkboxes no modal.
+* **Cenário 02:** Validar fechamento do modal pelo botão de fechar (X).
+* **Cenário 03:** Gerar Termo de Responsabilidade com sucesso.
+* **Cenário 04:** Gerar Termo de Empréstimo com sucesso.
+* **Cenário 05:** Validar se o PDF gerado contém todos os campos obrigatórios.
 
 ### US04: Relatório de Movimentação de Ativos
 * **Cenário 01:** Realizar pesquisa por Área e Período, validando a atualização da listagem.

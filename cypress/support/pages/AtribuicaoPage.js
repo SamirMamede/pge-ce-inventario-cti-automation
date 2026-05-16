@@ -19,6 +19,13 @@ class AtribuicaoPage {
   get btnRemoverAtivo() { return cy.get('.col-md-1 > .btn'); }
   get btnSalvar() { return cy.get('[name="commit"]'); }
   get btnCancelar() { return cy.get('a > .btn'); }
+  get checkboxPrimeiroRegistro() { return cy.get('tbody > tr').first().find('[name="bonds_ids[]"]'); }
+  get btnGerarTermosTabela() { return cy.get('.btn-info').contains('Gerar Termos'); }
+  get modalTermos() { return cy.get('#generate_term'); }
+  get chkResponsabilidade() { return cy.get('#term_type_liability'); }
+  get chkEmprestimo() { return cy.get('#term_type_loan'); }
+  get btnGerarDentroModal() { return cy.get('#btn-termo'); }
+  get btnFecharModal() { return cy.get('#generate_term .modal-header .red').parent(); }
 
   preencherInformacoesBasicas(dados) {
     this.selectArea.select(dados.area);
@@ -124,6 +131,20 @@ class AtribuicaoPage {
     validarPrimeiraLinhaTabela(areaEsperada, subareaEsperada) {
         cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain.text', areaEsperada);
         cy.get('tbody > :nth-child(1) > :nth-child(3)').should('contain.text', subareaEsperada);
+    }
+
+    abrirModalParaPrimeiroRegistro() {
+        this.checkboxPrimeiroRegistro.check();
+        this.btnGerarTermosTabela.click();
+        this.modalTermos.should('be.visible');
+    }
+
+    selecionarTipoTermo(tipo) {
+        if (tipo.toLowerCase() === 'responsabilidade') {
+            this.chkResponsabilidade.check();
+        } else if (tipo.toLowerCase() === 'emprestimo') {
+            this.chkEmprestimo.check();
+        }
     }
 }
 
