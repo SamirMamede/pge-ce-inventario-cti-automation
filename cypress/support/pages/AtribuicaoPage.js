@@ -93,7 +93,24 @@ class AtribuicaoPage {
                 cy.get('select[name*="[status_id]"] option:selected').should('contain.text', 'VÍNCULADO EM USO'); 
             });
       });
-  } 
+  }
+
+  substituirAtivoComDefeito(tomboAntigo, tomboNovo, motivo, atendente) {
+        cy.contains('#bond_asset .nested-fields', tomboAntigo).within(() => {
+            cy.get('select[name*="[status_id]"]').select('COM DEFEITO');
+            cy.get('input[name*="[observation]"], textarea[name*="[observation]"]').type(motivo);
+            cy.get('.btn-danger, .btn-remove').click(); 
+        });
+
+        cy.get('#bond_asset .nested-fields').last().within(() => {
+            cy.get('.select2-selection').click({ force: true });
+        });
+
+        cy.get('.select2-search__field').should('be.visible').type(`${tomboNovo}{enter}`);
+        cy.get('#bond_asset').should('contain', tomboNovo);
+        cy.get('select[name*="[status_id]"]').last().select('VÍNCULADO EM USO');
+
+    }
 }
 
 export default new AtribuicaoPage();

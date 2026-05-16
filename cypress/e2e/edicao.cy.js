@@ -17,6 +17,7 @@ describe('US02: Edição de Atribuições', () => {
         so: 'WINDOWS 10 PRO',
         tombo1: Cypress.env('tombo_disponivel_1'),
         tombo2: Cypress.env('tombo_disponivel_2'),
+        tombo3: Cypress.env('tombo_disponivel_3'),
         obs: 'Teste campo observação.'
     };
 
@@ -24,5 +25,16 @@ describe('US02: Edição de Atribuições', () => {
         AtribuicaoPage.clicarPrimeiroEditar();
         AtribuicaoPage.validarAtivosVinculados([dadosReferencia.tombo1, dadosReferencia.tombo2]);
         AtribuicaoPage.validarDadosCarregados(dadosReferencia);
+    });
+
+    it('Cenário 02: Substituir ativo com defeito por um novo ativo funcional', () => {
+    const tomboComDefeito = dadosReferencia.tombo1;
+    const tomboSubstituto = dadosReferencia.tombo3;
+    
+    AtribuicaoPage.clicarPrimeiroEditar();
+    AtribuicaoPage.substituirAtivoComDefeito(tomboComDefeito, tomboSubstituto, 'Motivo teste');
+    AtribuicaoPage.btnSalvar.click();
+
+    cy.get('.alert-success', { timeout: 10000 }).should('be.visible').and('contain', 'sucesso!');
     });
 });

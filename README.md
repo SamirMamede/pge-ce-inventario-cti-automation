@@ -56,12 +56,13 @@ Configuração de Ambiente:
 
 ## 🛠️ Configuração de Dados Dinâmicos
 
-Para rodar o `Cenário 01` da `US01: Cadastro de Atribuições`, é necessário configurar o arquivo cypress.env.json na raiz do projeto. Isso evita que o teste falhe por tentar utilizar ativos que já foram vinculados por outros usuários ou testes anteriores. Exemplo de cypress.env.json:
+Para rodar os testes da `US01: Cadastro de Atribuições` e da `US02: Edição de Atribuições`, é necessário configurar o arquivo `cypress.env.json` na raiz do projeto. Isso evita que os testes falhem por tentarem utilizar ativos que já foram vinculados por execuções anteriores.
 
 ```json
 {
-"tombo_disponivel_1": "15723",
-"tombo_disponivel_2": "15570"
+  "tombo_disponivel_1": "10516",
+  "tombo_disponivel_2": "14707",
+  "tombo_disponivel_3": "6807"
 }
 ```
 
