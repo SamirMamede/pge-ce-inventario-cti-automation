@@ -65,10 +65,10 @@ Serão automatizadas as seguintes Histórias de Usuário:
 * **Cenário 05:** Validar se o PDF gerado contém todos os campos obrigatórios.
 
 ### US04: Relatório de Movimentação de Ativos
-* **Cenário 01:** Realizar pesquisa por Área e Período, validando a atualização da listagem.
-* **Cenário 02:** Validar se os resultados são agrupados por área e exibem a quantidade correta de movimentações.
-* **Cenário 03:** Gerar relatório PDF e validar se o documento abre em nova aba respeitando a estrutura da tela.
-* **Cenário 04:** Validar a exibição da mensagem informativa "não há dados disponíveis" ao filtrar um período ou área sem movimentações.
+* **Cenário 01:** Validar filtros obrigatórios e comportamento sem dados disponíveis.
+* **Cenário 02:** Validar listagem em tela com agrupamento por Área e Data.
+* **Cenário 03:** Validar a presença de todas as colunas obrigatórias do Ativo na listagem.
+* **Cenário 04:** Validar geração de Relatório PDF espelhando os filtros em tela.
 
 ### US05: Relatório de Atribuições por Área
 * **Cenário 01:** Validar a atualização da listagem de atribuições ao alternar entre diferentes Áreas.
