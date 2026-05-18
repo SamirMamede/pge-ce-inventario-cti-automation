@@ -71,7 +71,6 @@ Serão automatizadas as seguintes Histórias de Usuário:
 * **Cenário 04:** Validar geração de Relatório PDF espelhando os filtros em tela.
 
 ### US05: Relatório de Atribuições por Área
-* **Cenário 01:** Validar a atualização da listagem de atribuições ao alternar entre diferentes Áreas.
-* **Cenário 02:** Validar se Tombo, Série e Descrição estão presentes na listagem e no relatório gerado.
-* **Cenário 03:** Validar mensagem informativa "não há dados disponíveis" para filtros sem ocorrências.
-* **Cenário 04:** Tentar pesquisar utilizando um período inválido e validar o tratamento de erro do sistema.
+* **Cenário 01:** Validar exibição do Relatório Sintético e seus gráficos gerados.
+* **Cenário 02:** Validar estrutura do Relatório Analítico e tabela detalhada.
+* **Cenário 03:** Validar a consistência do Relatório PDF gerado no modo Analítico.
