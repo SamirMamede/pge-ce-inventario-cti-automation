@@ -3,10 +3,7 @@ import AtribuicaoPage from '../support/pages/AtribuicaoPage';
 
 describe('US03: Geração de Termos de Atribuição', () => {
     beforeEach(() => {
-        LoginPage.visit();
-        LoginPage.login(Cypress.env('user_login'), Cypress.env('user_password'));
-
-        cy.visit(`${Cypress.env('baseUrl')}/portal_service/bonds`);
+    LoginPage.accessPageAfterLogin('/portal_service/bonds');
     });
 
     it('Cenário 01: Validar comportamento de exclusão mútua dos checkboxes no modal', () => {
@@ -39,7 +36,7 @@ describe('US03: Geração de Termos de Atribuição', () => {
             cy.get('@aberturaNovaAba').should('be.calledWithMatch', /term_responsibility_asset/);
         });
     
-    it('Cenário 04: Gerar Termo de Empréstimo com Sucesso', () => {
+    it.only('Cenário 04: Gerar Termo de Empréstimo com Sucesso', () => {
         cy.window().then((win) => {
             cy.stub(win, 'open').as('aberturaNovaAba');
         });

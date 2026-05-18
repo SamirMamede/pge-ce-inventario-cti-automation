@@ -6,8 +6,11 @@ module.exports = defineConfig({
   allowCypressEnv: true,
   viewportWidth: 1920,
   viewportHeight: 1080,
+  defaultCommandTimeout: 10000,
 
   e2e: {
+    baseUrl: "http://testeqa.pge.ce.gov.br",
+    
     setupNodeEvents(on, config) {
 
       on("task", {

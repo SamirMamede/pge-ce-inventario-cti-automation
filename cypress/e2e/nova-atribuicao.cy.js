@@ -3,10 +3,7 @@ import AtribuicaoPage from '../support/pages/AtribuicaoPage';
 
 describe('US01: Cadastro de Atribuições', () => {
   beforeEach(() => {
-    LoginPage.visit();
-    LoginPage.login(Cypress.env('user_login'), Cypress.env('user_password'));
-    
-    cy.visit(`${Cypress.env('baseUrl')}/portal_service/bonds/new`);     
+    LoginPage.accessPageAfterLogin('/portal_service/bonds/new');
   });
 
   it('Cenário 01: Cadastro vinculando múltiplos ativos a um colaborador em Home Office', () => {

@@ -3,10 +3,7 @@ import AtribuicaoPage from '../support/pages/AtribuicaoPage';
 
 describe('US02: Edição de Atribuições', () => {
     beforeEach(() => {
-        LoginPage.visit();
-        LoginPage.login(Cypress.env('user_login'), Cypress.env('user_password'));
-
-        cy.visit(`${Cypress.env('baseUrl')}/portal_service/bonds`);
+    LoginPage.accessPageAfterLogin('/portal_service/bonds');
     });
     
     const dadosReferencia = {

@@ -3,10 +3,7 @@ import MovimentacaoPage from '../support/pages/MovimentacaoPage';
 
 describe('US04 - Relatório de Movimentação de Ativos', () => {
     beforeEach(() => {
-        LoginPage.visit();
-        LoginPage.login(Cypress.env('user_login'), Cypress.env('user_password'));
-
-        cy.visit(`${Cypress.env('baseUrl')}/portal_service/reports/index`);
+    LoginPage.accessPageAfterLogin('/portal_service/reports/index');
     });
 
     it('Cenário 01: Validar comportamento sem dados disponíveis', () => {

@@ -1,13 +1,9 @@
 import LoginPage from '../support/pages/LoginPage';
 import RelatorioAtribuicoesPage from '../support/pages/RelatorioAtribuicoesPage';
 
-describe('US05 - Relatório de Atribuições por Área/Subárea', () => {
-    
+describe('US05 - Relatório de Atribuições por Área/Subárea', () => { 
     beforeEach(() => {
-        LoginPage.visit();
-        LoginPage.login(Cypress.env('user_login'), Cypress.env('user_password'));
-
-        cy.visit(`${Cypress.env('baseUrl')}/portal_service/reports/assignments_by_area`);
+    LoginPage.accessPageAfterLogin('/portal_service/reports/assignments_by_area');
     });
 
     it('Cenário 01: Validar exibição do Relatório Sintético e seus gráficos gerados', () => {

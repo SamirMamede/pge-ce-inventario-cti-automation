@@ -1,24 +1,43 @@
 class LoginPage {
+
   visit() {
-    cy.visit(Cypress.env('baseUrl'));
+    cy.visit('/');
   }
 
   fillEmail(email) {
-    cy.get('[name="admin[email]"]', { timeout: 10000 }).should('be.visible').type(email);
+    cy.get('[name="admin[email]"]')
+      .should('be.visible')
+      .type(email);
   }
 
   fillPassword(password) {
-    cy.get('[name="admin[password]"]').should('be.visible').type(password, { log: false });
+    cy.get('[name="admin[password]"]')
+      .should('be.visible')
+      .type(password, { log: false });
   }
 
   submit() {
-    cy.get('[name="commit"]').click();
+    cy.get('[name="commit"]')
+      .should('be.visible')
+      .and('not.be.disabled')
+      .click();
   }
 
   login(email, password) {
     this.fillEmail(email);
     this.fillPassword(password);
     this.submit();
+  }
+
+  accessPageAfterLogin(path) {
+    this.visit();
+
+    this.login(
+      Cypress.env('user_login'),
+      Cypress.env('user_password')
+    );
+
+    cy.visit(path);
   }
 }
 
