@@ -77,7 +77,6 @@ Consulte o arquivo `cypress.env.json.example` para o template completo.
 
 ## ✅ Cobertura Automatizada
 
-- Login
 - Cadastro de atribuições
 - Edição de atribuições
 - Geração de relatórios

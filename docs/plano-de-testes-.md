@@ -5,11 +5,11 @@ Este documento detalha a estratégia de teste para a validação das funcionalid
 
 ## 2. Escopo dos Testes
 Serão automatizadas as seguintes Histórias de Usuário:
-* **US01:** Cadastro de Ativo.
-* **US02:** Edição de Ativo.
-* **US03:** Atribuição de Ativo a Colaborador.
-* **US04:** Devolução de Ativo.
-* **US05:** Relatório de Movimentação.
+* **US01:** Cadastro de Atribuições.
+* **US02:** Editar Atribuições.
+* **US03:** Geração de Termos.
+* **US04:** Relatório de Movimentação de Ativos.
+* **US05:** Relatório de Atribuições por Área.
 
 ## 3. Ferramentas e Tecnologias
 * **Framework de Automação:** Cypress
