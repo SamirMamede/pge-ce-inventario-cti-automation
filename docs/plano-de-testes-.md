@@ -43,12 +43,12 @@ Serão automatizadas as seguintes Histórias de Usuário:
 ## 7. Detalhamento dos Cenários de Teste
 
 ### US01: Cadastro de Atribuições
-* **Cenário 01:** Cadastro vinculando múltiplos ativos a um colaborador com modalidade "Home Office" e Pacote Office habilitado, validando a mensagem de confirmação de sucesso após salvar.
-* **Cenário 02:** Cadastro de atribuição exclusiva para uma Subárea sem colaborador definido.
-* **Cenário 03:** Tentar salvar sem preencher campos obrigatórios (*) e validar se o sistema impede a operação exibindo mensagens de erro específicas.
-* **Cenário 04:** Validar que o campo de seleção "Pacote Office" permanece condicionado apenas à marcação da checkbox "Utilizará Pacote Office?".
-* **Cenário 05:** Valida regra de negócio de duplicidade no inventário.
-* **Cenário 06:** Validar que o botão "Cancelar" descarta as informações preenchidas sem persistir dados no inventário.
+* **Cenário 01:** Deve cadastrar múltiplos ativos para colaborador em Home Office.
+* **Cenário 02:** Deve cadastrar atribuição exclusiva para subárea sem colaborador.
+* **Cenário 03:** Não deve permitir salvar sem preencher campos obrigatórios.
+* **Cenário 04:** Deve habilitar campo Pacote Office apenas quando checkbox estiver marcado.
+* **Cenário 05:** Não deve permitir vincular ativo já utilizado.
+* **Cenário 06:** Deve descartar informações ao cancelar cadastro.
 
 ### US02: Editar Atribuições
 * **Cenário 01:** Validar se todos os campos carregam os dados corretamente ao clicar em "Editar".
