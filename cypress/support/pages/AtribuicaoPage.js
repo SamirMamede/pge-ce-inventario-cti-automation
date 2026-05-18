@@ -64,6 +64,38 @@ class AtribuicaoPage {
     return cy.contains('a', 'Cancelar');
   }
 
+  get checkboxPrimeiroRegistro() {
+  return cy.get('tbody > tr')
+    .first()
+    .find('[name="bonds_ids[]"]');
+  }
+
+  get btnGerarTermosTabela() {
+    return cy.contains('button, a', 'Gerar Termos');
+  }
+
+  get modalTermos() {
+    return cy.get('#generate_term');
+  }
+
+  get chkResponsabilidade() {
+    return cy.get('#term_type_liability');
+  }
+
+  get chkEmprestimo() {
+    return cy.get('#term_type_loan');
+  }
+
+  get btnGerarDentroModal() {
+    return cy.get('#btn-termo');
+  }
+
+  get btnFecharModal() {
+    return cy.get(
+      '#generate_term button[data-dismiss="modal"]'
+    );
+  }
+
   preencherInformacoesBasicas(dados) {
 
     this.selectArea.select(dados.area);
@@ -258,6 +290,25 @@ class AtribuicaoPage {
 
     cy.get('tbody > :nth-child(1) > :nth-child(3)')
       .should('contain.text', subareaEsperada);
+  }
+
+  abrirModalParaPrimeiroRegistro() {
+
+  this.checkboxPrimeiroRegistro
+    .check();
+
+  this.btnGerarTermosTabela
+    .click();
+
+  this.modalTermos
+    .should('be.visible');
+  }
+
+  prepararStubNovaAba() {
+
+    cy.window().then((win) => {
+      cy.stub(win, 'open').as('aberturaNovaAba');
+    });
   }
 }
 
