@@ -14,7 +14,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 
 ## 🏗️ Arquitetura
 
-O projeto utiliza o padrão **Page Object Model**. 
+O projeto foi estruturado utilizando o padrão Page Object Model (POM), visando maior reutilização, legibilidade e manutenibilidade dos testes automatizados. 
 
 ## 📂 Estrutura do Projeto
 
@@ -23,9 +23,8 @@ O projeto utiliza o padrão **Page Object Model**.
 │   ├── e2e/             # Cenários de teste
 │   ├── support/
 │   │   ├── pages/       # Classes com os elementos e ações
-│   │   └── commands.js  # Comandos customizados
 │   ├── fixtures/        # Massas de dados para os testes
-├── docs/                # Plano de Teste e documentação adicional
+├── docs/                # Plano de Teste
 └── cypress.config.js    # Configurações globais do framework
 ```
 
@@ -33,7 +32,7 @@ O projeto utiliza o padrão **Page Object Model**.
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
-* [Node.js](https://nodejs.org/en/) (Versão utilizada: `v22.14.0` ou superior)
+* [Node.js](https://nodejs.org/en/) (Versão utilizada: `Node.js v22.14.0`)
 * [npm](https://www.npmjs.com/) (Versão utilizada: `10.2.5` ou superior)
 * Um editor de código
 
@@ -52,7 +51,10 @@ npm install
 ```
 
 Configuração de Ambiente:
- - Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira suas credenciais.
+ - O ambiente base da aplicação está configurado no arquivo `cypress.config.js` através da propriedade `baseUrl`.
+ - Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira as credenciais de acesso ao sistema.
+ - O projeto utiliza a biblioteca `pdf-parse` para validação de conteúdo em arquivos PDF gerados pelo sistema.
+> ⚠️ O projeto depende de credenciais válidas do sistema Inventário CTI para execução dos testes autenticados.
 
 ## 🛠️ Configuração de Dados Dinâmicos
 
@@ -68,6 +70,15 @@ Para rodar os testes da `US01: Cadastro de Atribuições` e da `US02: Edição d
 
 Consulte o arquivo `cypress.env.json.example` para o template completo.
 
-Execução:
- - Modo Interativo (Interface): `npx cypress open`
- - Modo Headless (Console): `npx cypress run`
+## 📜 Scripts disponíveis
+
+- `npm run cy:open` → Executa o Cypress em modo interativo
+- `npm run cy:run` → Executa os testes em modo headless
+
+## ✅ Cobertura Automatizada
+
+- Login
+- Cadastro de atribuições
+- Edição de atribuições
+- Geração de relatórios
+- Validação de PDFs
