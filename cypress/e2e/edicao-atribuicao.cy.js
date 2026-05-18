@@ -1,70 +1,111 @@
 import LoginPage from '../support/pages/LoginPage';
 import AtribuicaoPage from '../support/pages/AtribuicaoPage';
 
+const obterDadosReferencia = () => ({
+  area: 'Teste',
+  subarea: 'Teste',
+  atendidoPor: 'Atendente',
+  modalidade: 'Home Office',
+  so: 'WINDOWS 10 PRO',
+  tombo1: Cypress.env('tombo_disponivel_1'),
+  tombo2: Cypress.env('tombo_disponivel_2'),
+  tombo3: Cypress.env('tombo_disponivel_3'),
+  tombo4: Cypress.env('tombo_disponivel_4'),
+  obs: 'Teste campo observação.'
+});
+
 describe('US02: Edição de Atribuições', () => {
-    beforeEach(() => {
+
+  beforeEach(() => {
     LoginPage.accessPageAfterLogin('/portal_service/bonds');
-    });
-    
-    const dadosReferencia = {
-        area: 'Teste',
-        subarea: 'Teste',
-        atendidoPor: 'Atendente',
-        modalidade: 'Home Office',
-        so: 'WINDOWS 10 PRO',
-        tombo1: Cypress.env('tombo_disponivel_1'),
-        tombo2: Cypress.env('tombo_disponivel_2'),
-        tombo3: Cypress.env('tombo_disponivel_3'),
-        obs: 'Teste campo observação.'
-    };
+  });
 
-    it('Cenário 01: Validar se todos os campos carregam os dados corretamente ao clicar em "Editar"', () => {
-        AtribuicaoPage.clicarPrimeiroEditar();
-        AtribuicaoPage.validarAtivosVinculados([dadosReferencia.tombo1, dadosReferencia.tombo2]);
-        AtribuicaoPage.validarDadosCarregados(dadosReferencia);
-    });
+  const dadosReferencia = obterDadosReferencia();
 
-    it('Cenário 02: Substituir ativo com defeito por um novo ativo funcional', () => {
-        const tomboComDefeito = dadosReferencia.tombo1;
-        const tomboSubstituto = dadosReferencia.tombo3;
-        
-        AtribuicaoPage.clicarPrimeiroEditar();
-        
-        AtribuicaoPage.substituirAtivo(tomboComDefeito, tomboSubstituto, 'COM DEFEITO', 'Motivo teste');
-        AtribuicaoPage.clicarEmSalvar();
+  it('Cenário 01: Deve carregar corretamente os dados ao editar atribuição', () => {
 
-        cy.get('.alert-success', { timeout: 10000 }).should('be.visible').and('contain', 'sucesso!');
-    });
+    AtribuicaoPage.clicarPrimeiroEditar();
 
-    it('Cenário 03: Substituir ativo saudável por outro ativo', () => {
-        const tomboSaudavel = dadosReferencia.tombo1;
-        const tomboSubstituto = dadosReferencia.tombo3;
-        
-        AtribuicaoPage.clicarPrimeiroEditar();
-        
-        AtribuicaoPage.substituirAtivo(tomboSaudavel, tomboSubstituto, 'DISPONÍVEL');
-        AtribuicaoPage.clicarEmSalvar();
+    AtribuicaoPage.validarAtivosVinculados([
+      dadosReferencia.tombo1,
+      dadosReferencia.tombo2
+    ]);
 
-        cy.get('.alert-success', { timeout: 10000 }).should('be.visible').and('contain', 'sucesso!');
-    });
+    AtribuicaoPage.validarDadosCarregados(dadosReferencia);
+  });
 
-    it('Cenário 04: Modificar a Área/Subárea de uma atribuição e validar na listagem', () => {
-        const novaAreaModificada = 'CEDAT';
-        const novaSubareaModificada = 'DIVIDA ATIVA';
+  it('Cenário 02: Deve substituir ativo com defeito por novo ativo funcional', () => {
 
-        AtribuicaoPage.clicarPrimeiroEditar();
-        AtribuicaoPage.alterarAreaESubarea(novaAreaModificada, novaSubareaModificada);
-        AtribuicaoPage.clicarEmSalvar();
+    AtribuicaoPage.clicarPrimeiroEditar();
 
-        cy.get('.alert-success', { timeout: 10000 }).should('be.visible').and('contain', 'sucesso!');
+    AtribuicaoPage.substituirAtivo(
+      dadosReferencia.tombo1,
+      dadosReferencia.tombo3,
+      'COM DEFEITO',
+      'Motivo teste'
+    );
 
-        AtribuicaoPage.validarPrimeiraLinhaTabela(novaAreaModificada, novaSubareaModificada);
-    });
+    AtribuicaoPage.clicarEmSalvar();
 
-    it('Cenário 05: Validar impedimento ao tentar salvar uma edição removendo o conteúdo de campos obrigatórios', () => {
-        AtribuicaoPage.clicarPrimeiroEditar();
-        AtribuicaoPage.selectArea.select('');
-        AtribuicaoPage.clicarEmSalvar();
-        AtribuicaoPage.selectArea.invoke('prop', 'validationMessage').should('be.oneOf', ['Selecione um item da lista.', 'Please select an item in the list.']);
-    });
+    cy.get('.alert-success')
+      .should('be.visible')
+      .and('contain.text', 'sucesso');
+  });
+
+  it('Cenário 03: Deve substituir ativo saudável por outro ativo disponível', () => {
+
+    AtribuicaoPage.clicarPrimeiroEditar();
+
+    AtribuicaoPage.substituirAtivo(
+      dadosReferencia.tombo2,
+      dadosReferencia.tombo4,
+      'DISPONÍVEL'
+    );
+
+    AtribuicaoPage.clicarEmSalvar();
+
+    cy.get('.alert-success')
+      .should('be.visible')
+      .and('contain.text', 'sucesso');
+  });
+
+  it('Cenário 04: Deve alterar Área/Subárea e refletir mudança na listagem', () => {
+
+    const novaArea = 'CEDAT';
+    const novaSubarea = 'DIVIDA ATIVA';
+
+    AtribuicaoPage.clicarPrimeiroEditar();
+
+    AtribuicaoPage.alterarAreaESubarea(
+      novaArea,
+      novaSubarea
+    );
+
+    AtribuicaoPage.clicarEmSalvar();
+
+    cy.get('.alert-success')
+      .should('be.visible')
+      .and('contain.text', 'sucesso');
+
+    AtribuicaoPage.validarPrimeiraLinhaTabela(
+      novaArea,
+      novaSubarea
+    );
+  });
+
+  it('Cenário 05: Não deve permitir salvar edição sem campos obrigatórios', () => {
+
+    AtribuicaoPage.clicarPrimeiroEditar();
+
+    AtribuicaoPage.selectArea.select('');
+
+    AtribuicaoPage.clicarEmSalvar();
+
+    AtribuicaoPage.selectArea
+      .invoke('prop', 'validationMessage')
+      .should('be.oneOf', [
+        'Selecione um item da lista.',
+        'Please select an item in the list.'
+      ]);
+  });
 });

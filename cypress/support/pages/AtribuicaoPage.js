@@ -25,7 +25,7 @@ class AtribuicaoPage {
   }
 
   get fieldAtendidoPor() {
-    return cy.get('[name="bond[attendant_attributes][0][attended_by]"]');
+    return cy.get('[name*="[attended_by]"]');
   }
 
   get radioPresencial() {
@@ -61,7 +61,7 @@ class AtribuicaoPage {
   }
 
   get btnCancelar() {
-    return cy.get('a > .btn');
+    return cy.contains('a', 'Cancelar');
   }
 
   preencherInformacoesBasicas(dados) {
@@ -113,7 +113,8 @@ class AtribuicaoPage {
       .should('be.visible')
       .type(`${tombo}{enter}`);
 
-    cy.contains(tombo).should('exist');
+    cy.get('#bond_asset')
+      .should('contain.text', tombo);
   }
 
   clicarEmSalvar() {
@@ -123,6 +124,140 @@ class AtribuicaoPage {
       .should('be.visible')
       .and('not.be.disabled')
       .click();
+  }
+
+  validarDadosCarregados(dados) {
+
+    cy.get('.card-header')
+      .should('contain.text', 'Atualizando Atribuição');
+
+    this.selectArea.should('contain', dados.area);
+
+    this.selectSubarea.should('contain', dados.subarea);
+
+    this.fieldAtendidoPor
+      .find('option:selected')
+      .should('contain.text', dados.atendidoPor);
+
+    if (dados.modalidade === 'Home Office') {
+      this.radioHomeOffice.should('be.checked');
+    } else {
+      this.radioPresencial.should('be.checked');
+    }
+
+    if (dados.so) {
+      this.selectSO.should('contain', dados.so);
+    }
+
+    if (dados.obs) {
+      this.fieldObservacoes.should(
+        'have.value',
+        dados.obs
+      );
+    }
+  }
+
+  clicarPrimeiroEditar() {
+
+    cy.get('table tbody tr')
+      .first()
+      .within(() => {
+
+        cy.get('a[href*="/edit"]')
+          .should('exist')
+          .click({ force: true });
+      });
+
+    cy.url().should('include', '/edit');
+  }
+
+  validarAtivosVinculados(tombosEsperados) {
+
+    const listaTombos = Array.isArray(tombosEsperados)
+      ? tombosEsperados
+      : [tombosEsperados];
+
+    listaTombos.forEach((tombo) => {
+
+      cy.contains('#bond_asset .nested-fields', tombo)
+        .should('be.visible')
+        .within(() => {
+
+          cy.get(
+            'input[name*="[description]"], textarea[name*="[description]"]'
+          ).should('not.be.empty');
+
+          cy.get(
+            'select[name*="[status_id]"] option:selected'
+          ).should('contain.text', 'VÍNCULADO EM USO');
+        });
+    });
+  }
+
+  substituirAtivo(
+    tomboAntigo,
+    tomboNovo,
+    novoStatus,
+    motivo = null
+  ) {
+
+    cy.contains('#bond_asset .nested-fields', tomboAntigo)
+      .should('be.visible')
+      .within(() => {
+
+        cy.get('select[name*="[status_id]"]')
+          .select(novoStatus);
+
+        if (motivo) {
+
+          cy.get(
+            'input[name*="[observation]"], textarea[name*="[observation]"]'
+          ).type(motivo);
+        }
+
+        cy.get('.btn-danger, .btn-remove')
+          .should('be.visible')
+          .click();
+      });
+
+    cy.get('#bond_asset .nested-fields')
+      .last()
+      .within(() => {
+
+        cy.get('.select2-selection')
+          .should('be.visible')
+          .click();
+      });
+
+    cy.get('.select2-search__field')
+      .should('be.visible')
+      .type(`${tomboNovo}{enter}`);
+
+    cy.contains('#bond_asset', tomboNovo)
+      .should('be.visible');
+
+    cy.get('select[name*="[status_id]"]')
+      .last()
+      .select('VÍNCULADO EM USO');
+  }
+
+  alterarAreaESubarea(novaArea, novaSubarea) {
+
+    this.selectArea.select(novaArea);
+
+    this.selectSubarea.select(novaSubarea);
+  }
+
+  validarPrimeiraLinhaTabela(
+    areaEsperada,
+    subareaEsperada
+  ) {
+
+    cy.get('tbody > :nth-child(1) > :nth-child(2)')
+      .should('contain.text', areaEsperada);
+
+    cy.get('tbody > :nth-child(1) > :nth-child(3)')
+      .should('contain.text', subareaEsperada);
   }
 }
 
