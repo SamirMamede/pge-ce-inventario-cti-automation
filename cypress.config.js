@@ -10,12 +10,10 @@ module.exports = defineConfig({
 
   e2e: {
     baseUrl: "http://testeqa.pge.ce.gov.br",
-    
-    setupNodeEvents(on, config) {
 
+    setupNodeEvents(on, config) {
       on("task", {
         getPdfText(filePath) {
-
           if (!fs.existsSync(filePath)) {
             throw new Error(`Arquivo não encontrado em: ${filePath}`);
           }

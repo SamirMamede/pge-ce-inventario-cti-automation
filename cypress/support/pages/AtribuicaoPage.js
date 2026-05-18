@@ -1,5 +1,4 @@
 class AtribuicaoPage {
-
   get selectArea() {
     return cy.get('[name="bond[area]"]');
   }
@@ -9,19 +8,19 @@ class AtribuicaoPage {
   }
 
   get radioColaborador() {
-    return cy.get('#bond_employee_type_colaborador');
+    return cy.get("#bond_employee_type_colaborador");
   }
 
   get radioSemColaborador() {
-    return cy.get('#bond_employee_type_sem_usuario');
+    return cy.get("#bond_employee_type_sem_usuario");
   }
 
   get radioSubarea() {
-    return cy.get('#bond_employee_type_subarea');
+    return cy.get("#bond_employee_type_subarea");
   }
 
   get containerColaborador() {
-    return cy.get('#select2-collaborators-container');
+    return cy.get("#select2-collaborators-container");
   }
 
   get fieldAtendidoPor() {
@@ -29,11 +28,11 @@ class AtribuicaoPage {
   }
 
   get radioPresencial() {
-    return cy.get('#bond_modality_presencial');
+    return cy.get("#bond_modality_presencial");
   }
 
   get radioHomeOffice() {
-    return cy.get('#bond_modality_home_office');
+    return cy.get("#bond_modality_home_office");
   }
 
   get selectSO() {
@@ -41,7 +40,7 @@ class AtribuicaoPage {
   }
 
   get checkOffice() {
-    return cy.get('#check_office');
+    return cy.get("#check_office");
   }
 
   get selectPacoteOffice() {
@@ -53,7 +52,7 @@ class AtribuicaoPage {
   }
 
   get btnAtribuirAtivo() {
-    return cy.get('#btn_asset');
+    return cy.get("#btn_asset");
   }
 
   get btnSalvar() {
@@ -61,56 +60,51 @@ class AtribuicaoPage {
   }
 
   get btnCancelar() {
-    return cy.contains('a', 'Cancelar');
+    return cy.contains("a", "Cancelar");
   }
 
   get checkboxPrimeiroRegistro() {
-  return cy.get('tbody > tr')
-    .first()
-    .find('[name="bonds_ids[]"]');
+    return cy.get("tbody > tr").first().find('[name="bonds_ids[]"]');
   }
 
   get btnGerarTermosTabela() {
-    return cy.contains('button, a', 'Gerar Termos');
+    return cy.contains("button, a", "Gerar Termos");
   }
 
   get modalTermos() {
-    return cy.get('#generate_term');
+    return cy.get("#generate_term");
   }
 
   get chkResponsabilidade() {
-    return cy.get('#term_type_liability');
+    return cy.get("#term_type_liability");
   }
 
   get chkEmprestimo() {
-    return cy.get('#term_type_loan');
+    return cy.get("#term_type_loan");
   }
 
   get btnGerarDentroModal() {
-    return cy.get('#btn-termo');
+    return cy.get("#btn-termo");
   }
 
   get btnFecharModal() {
-    return cy.get(
-      '#generate_term button[data-dismiss="modal"]'
-    );
+    return cy.get('#generate_term button[data-dismiss="modal"]');
   }
 
   preencherInformacoesBasicas(dados) {
-
     this.selectArea.select(dados.area);
 
     this.selectSubarea.select(dados.subarea);
 
     this.containerColaborador.click();
 
-    cy.contains('.select2-results__option', dados.colaborador)
-      .should('be.visible')
+    cy.contains(".select2-results__option", dados.colaborador)
+      .should("be.visible")
       .click();
 
     this.fieldAtendidoPor.select(dados.atendidoPor);
 
-    if (dados.modalidade === 'Home Office') {
+    if (dados.modalidade === "Home Office") {
       this.radioHomeOffice.check();
     } else {
       this.radioPresencial.check();
@@ -126,189 +120,158 @@ class AtribuicaoPage {
   }
 
   clicarAdicionarAtivo() {
-
     this.btnAtribuirAtivo
       .scrollIntoView()
-      .should('be.visible')
-      .and('not.be.disabled')
+      .should("be.visible")
+      .and("not.be.disabled")
       .click();
   }
 
   selecionarAtivo(tombo) {
+    cy.get(".select2-selection").last().should("be.visible").click();
 
-    cy.get('.select2-selection')
-      .last()
-      .should('be.visible')
-      .click();
-
-    cy.get('.select2-search__field')
-      .should('be.visible')
+    cy.get(".select2-search__field")
+      .should("be.visible")
       .type(`${tombo}{enter}`);
 
-    cy.get('#bond_asset')
-      .should('contain.text', tombo);
+    cy.get("#bond_asset").should("contain.text", tombo);
   }
 
   clicarEmSalvar() {
-
     this.btnSalvar
       .scrollIntoView()
-      .should('be.visible')
-      .and('not.be.disabled')
+      .should("be.visible")
+      .and("not.be.disabled")
       .click();
   }
 
   validarDadosCarregados(dados) {
+    cy.get(".card-header").should("contain.text", "Atualizando Atribuição");
 
-    cy.get('.card-header')
-      .should('contain.text', 'Atualizando Atribuição');
+    this.selectArea.should("contain", dados.area);
 
-    this.selectArea.should('contain', dados.area);
-
-    this.selectSubarea.should('contain', dados.subarea);
+    this.selectSubarea.should("contain", dados.subarea);
 
     this.fieldAtendidoPor
-      .find('option:selected')
-      .should('contain.text', dados.atendidoPor);
+      .find("option:selected")
+      .should("contain.text", dados.atendidoPor);
 
-    if (dados.modalidade === 'Home Office') {
-      this.radioHomeOffice.should('be.checked');
+    if (dados.modalidade === "Home Office") {
+      this.radioHomeOffice.should("be.checked");
     } else {
-      this.radioPresencial.should('be.checked');
+      this.radioPresencial.should("be.checked");
     }
 
     if (dados.so) {
-      this.selectSO.should('contain', dados.so);
+      this.selectSO.should("contain", dados.so);
     }
 
     if (dados.obs) {
-      this.fieldObservacoes.should(
-        'have.value',
-        dados.obs
-      );
+      this.fieldObservacoes.should("have.value", dados.obs);
     }
   }
 
   clicarPrimeiroEditar() {
-
-    cy.get('table tbody tr')
+    cy.get("table tbody tr")
       .first()
       .within(() => {
-
-        cy.get('a[href*="/edit"]')
-          .should('exist')
-          .click({ force: true });
+        cy.get('a[href*="/edit"]').should("exist").click({ force: true });
       });
 
-    cy.url().should('include', '/edit');
+    cy.url().should("include", "/edit");
   }
 
   validarAtivosVinculados(tombosEsperados) {
-
     const listaTombos = Array.isArray(tombosEsperados)
       ? tombosEsperados
       : [tombosEsperados];
 
     listaTombos.forEach((tombo) => {
-
-      cy.contains('#bond_asset .nested-fields', tombo)
-        .should('be.visible')
+      cy.contains("#bond_asset .nested-fields", tombo)
+        .should("be.visible")
         .within(() => {
-
           cy.get(
-            'input[name*="[description]"], textarea[name*="[description]"]'
-          ).should('not.be.empty');
+            'input[name*="[description]"], textarea[name*="[description]"]',
+          ).should("not.be.empty");
 
-          cy.get(
-            'select[name*="[status_id]"] option:selected'
-          ).should('contain.text', 'VÍNCULADO EM USO');
+          cy.get('select[name*="[status_id]"] option:selected').should(
+            "contain.text",
+            "VÍNCULADO EM USO",
+          );
         });
     });
   }
 
-  substituirAtivo(
-    tomboAntigo,
-    tomboNovo,
-    novoStatus,
-    motivo = null
-  ) {
-
-    cy.contains('#bond_asset .nested-fields', tomboAntigo)
-      .should('be.visible')
+  substituirAtivo(tomboAntigo, tomboNovo, novoStatus, motivo = null) {
+    cy.contains("#bond_asset .nested-fields", tomboAntigo)
+      .should("be.visible")
       .within(() => {
-
-        cy.get('select[name*="[status_id]"]')
-          .select(novoStatus);
+        cy.get('select[name*="[status_id]"]').select(novoStatus);
 
         if (motivo) {
-
           cy.get(
-            'input[name*="[observation]"], textarea[name*="[observation]"]'
+            'input[name*="[observation]"], textarea[name*="[observation]"]',
           ).type(motivo);
         }
 
-        cy.get('.btn-danger, .btn-remove')
-          .should('be.visible')
-          .click();
+        cy.get(".btn-danger, .btn-remove").should("be.visible").click();
       });
 
-    cy.get('#bond_asset .nested-fields')
+    cy.get("#bond_asset .nested-fields")
       .last()
       .within(() => {
-
-        cy.get('.select2-selection')
-          .should('be.visible')
-          .click();
+        cy.get(".select2-selection").should("be.visible").click();
       });
 
-    cy.get('.select2-search__field')
-      .should('be.visible')
+    cy.get(".select2-search__field")
+      .should("be.visible")
       .type(`${tomboNovo}{enter}`);
 
-    cy.contains('#bond_asset', tomboNovo)
-      .should('be.visible');
+    cy.contains("#bond_asset", tomboNovo).should("be.visible");
 
-    cy.get('select[name*="[status_id]"]')
-      .last()
-      .select('VÍNCULADO EM USO');
+    cy.get('select[name*="[status_id]"]').last().select("VÍNCULADO EM USO");
   }
 
   alterarAreaESubarea(novaArea, novaSubarea) {
-
     this.selectArea.select(novaArea);
 
     this.selectSubarea.select(novaSubarea);
   }
 
-  validarPrimeiraLinhaTabela(
-    areaEsperada,
-    subareaEsperada
-  ) {
+  validarPrimeiraLinhaTabela(areaEsperada, subareaEsperada) {
+    cy.get("tbody > :nth-child(1) > :nth-child(2)").should(
+      "contain.text",
+      areaEsperada,
+    );
 
-    cy.get('tbody > :nth-child(1) > :nth-child(2)')
-      .should('contain.text', areaEsperada);
-
-    cy.get('tbody > :nth-child(1) > :nth-child(3)')
-      .should('contain.text', subareaEsperada);
+    cy.get("tbody > :nth-child(1) > :nth-child(3)").should(
+      "contain.text",
+      subareaEsperada,
+    );
   }
 
   abrirModalParaPrimeiroRegistro() {
+    this.checkboxPrimeiroRegistro.check();
 
-  this.checkboxPrimeiroRegistro
-    .check();
+    this.btnGerarTermosTabela.click();
 
-  this.btnGerarTermosTabela
-    .click();
-
-  this.modalTermos
-    .should('be.visible');
+    this.modalTermos.should("be.visible");
   }
 
   prepararStubNovaAba() {
-
     cy.window().then((win) => {
-      cy.stub(win, 'open').as('aberturaNovaAba');
+      cy.stub(win, "open").as("aberturaNovaAba");
     });
+  }
+
+  editarRegistroPorTombo(tombo) {
+    cy.contains("table tbody tr", tombo)
+      .should("exist")
+      .within(() => {
+        cy.get('a[href*="/edit"]').click({ force: true });
+      });
+
+    cy.url().should("include", "/edit");
   }
 }
 
