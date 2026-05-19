@@ -97,5 +97,7 @@ describe("US02: Edição de Atribuições", () => {
         "Selecione um item da lista.",
         "Please select an item in the list.",
       ]);
+
+    cy.get(".alert-success").should("not.exist");
   });
 });

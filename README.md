@@ -8,13 +8,13 @@ Este projeto consiste em uma suíte de testes automatizados de ponta a ponta (E2
 
 As seguintes ferramentas foram utilizadas na construção do projeto:
 
-* **Framework:** [Cypress](https://www.cypress.io/)
-* **Linguagem:** [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-* **Ambiente de Execução:** [Node.js](https://nodejs.org/)
+- **Framework:** [Cypress](https://www.cypress.io/)
+- **Linguagem:** [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- **Ambiente de Execução:** [Node.js](https://nodejs.org/)
 
 ## 🏗️ Arquitetura
 
-O projeto foi estruturado utilizando o padrão Page Object Model (POM), visando maior reutilização, legibilidade e manutenibilidade dos testes automatizados. 
+O projeto foi estruturado utilizando o padrão Page Object Model (POM), visando maior reutilização, legibilidade e manutenibilidade dos testes automatizados.
 
 ## 📂 Estrutura do Projeto
 
@@ -32,9 +32,9 @@ O projeto foi estruturado utilizando o padrão Page Object Model (POM), visando 
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
-* [Node.js](https://nodejs.org/en/) (Versão utilizada: `Node.js v22.14.0`)
-* [npm](https://www.npmjs.com/) (Versão utilizada: `10.2.5` ou superior)
-* Um editor de código
+- [Node.js](https://nodejs.org/en/) (Versão utilizada: `Node.js v22.14.0`)
+- [npm](https://www.npmjs.com/) (Versão utilizada: `10.2.5` ou superior)
+- Um editor de código
 
 ## 🚀 Como executar
 
@@ -51,10 +51,11 @@ npm install
 ```
 
 Configuração de Ambiente:
- - O ambiente base da aplicação está configurado no arquivo `cypress.config.js` através da propriedade `baseUrl`.
- - Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira as credenciais de acesso ao sistema.
- - O projeto utiliza a biblioteca `pdf-parse` para validação de conteúdo em arquivos PDF gerados pelo sistema.
-> ⚠️ O projeto depende de credenciais válidas do sistema Inventário CTI para execução dos testes autenticados.
+
+- O ambiente base da aplicação está configurado no arquivo `cypress.config.js` através da propriedade `baseUrl`.
+- Crie um arquivo na raiz do projeto chamado `cypress.env.json` baseando-se no arquivo `cypress.env.json.example` e insira as credenciais de acesso ao sistema.
+- O projeto utiliza a biblioteca `pdf-parse` para validação de conteúdo em arquivos PDF gerados pelo sistema.
+  > ⚠️ O projeto depende de credenciais válidas do sistema Inventário CTI para execução dos testes autenticados.
 
 ## 🛠️ Configuração de Dados Dinâmicos
 
@@ -81,3 +82,19 @@ Consulte o arquivo `cypress.env.json.example` para o template completo.
 - Edição de atribuições
 - Geração de relatórios
 - Validação de PDFs
+
+---
+
+## 🧪 Plano de Testes
+
+Para consultar o plano de teste completo, acesse o link:
+
+👉 **[Acesse aqui o Plano de Testes](./docs/plano-de-testes.md)**
+
+---
+
+## 📝 Evidências e Melhorias
+
+Para consultar os resultados visuais dos testes, bugs mapeados e sugestões técnicas para o sistema, acesse o relatório completo:
+
+👉 **[Acesse aqui o Relatório Completo de Evidências, Bugs Encontrados e Propostas de Melhoria](./docs/evidencias-testes.md)**

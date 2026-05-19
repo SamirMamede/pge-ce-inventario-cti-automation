@@ -49,7 +49,7 @@ describe("US01: Cadastro de Atribuições", () => {
 
     AtribuicaoPage.selectSubarea.select(dadosSubarea.subarea);
 
-    AtribuicaoPage.radioSemColaborador.check();
+    AtribuicaoPage.radioSubarea.check();
 
     AtribuicaoPage.fieldAtendidoPor.select(dadosSubarea.atendidoPor);
 
@@ -75,6 +75,8 @@ describe("US01: Cadastro de Atribuições", () => {
         "Selecione um item da lista.",
         "Please select an item in the list.",
       ]);
+
+    cy.get(".alert-success").should("not.exist");
   });
 
   it("Cenário 04: Deve habilitar campo Pacote Office apenas quando checkbox estiver marcado", () => {
