@@ -34,7 +34,10 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 - [Node.js](https://nodejs.org/en/) (Versão utilizada: `Node.js v22.14.0`)
 - [npm](https://www.npmjs.com/) (Versão utilizada: `10.2.5` ou superior)
+- Navegador `Google Chrome` ou `Microsoft Edge` instalado
 - Um editor de código
+
+  > ⚠️ As suítes de testes foram desenvolvidas e validadas principalmente utilizando o Google Chrome via Cypress.
 
 ## 🚀 Como executar
 
