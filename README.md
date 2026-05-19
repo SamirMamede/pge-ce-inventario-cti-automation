@@ -61,13 +61,20 @@ Configuração de Ambiente:
 
 Para rodar os testes da `US01: Cadastro de Atribuições` e da `US02: Edição de Atribuições`, é necessário configurar o arquivo `cypress.env.json` na raiz do projeto. Isso evita que os testes falhem por tentarem utilizar ativos que já foram vinculados por execuções anteriores.
 
+Os tombos informados nas variáveis de ambiente **devem estar disponíveis para vinculação dentro do sistema**, ou seja:
+
+- não podem estar com status `VINCULADO`;
+- não podem estar com status `VINCULADO EM USO`;
+- precisam estar livres para novas atribuições no momento da execução da suíte.
+
+Exemplo:
+
 ```json
 {
   "tombo_disponivel_1": "10516",
   "tombo_disponivel_2": "14707",
   "tombo_disponivel_3": "6807"
 }
-```
 
 Consulte o arquivo `cypress.env.json.example` para o template completo.
 
@@ -98,3 +105,4 @@ Para consultar o plano de teste completo, acesse o link:
 Para consultar os resultados visuais dos testes, bugs mapeados e sugestões técnicas para o sistema, acesse o relatório completo:
 
 👉 **[Acesse aqui o Relatório Completo de Evidências, Bugs Encontrados e Propostas de Melhoria](./docs/evidencias-testes.md)**
+```
