@@ -75,6 +75,7 @@ Exemplo:
   "tombo_disponivel_2": "14707",
   "tombo_disponivel_3": "6807"
 }
+```
 
 Consulte o arquivo `cypress.env.json.example` para o template completo.
 
@@ -105,4 +106,3 @@ Para consultar o plano de teste completo, acesse o link:
 Para consultar os resultados visuais dos testes, bugs mapeados e sugestões técnicas para o sistema, acesse o relatório completo:
 
 👉 **[Acesse aqui o Relatório Completo de Evidências, Bugs Encontrados e Propostas de Melhoria](./docs/evidencias-testes.md)**
-```
