@@ -26,6 +26,11 @@ class LoginPage {
     this.submit();
   }
 
+  fillCredentials(email, password) {
+    this.fillEmail(email);
+    this.fillPassword(password);
+  }
+
   accessPageAfterLogin(path) {
     this.visit();
 
