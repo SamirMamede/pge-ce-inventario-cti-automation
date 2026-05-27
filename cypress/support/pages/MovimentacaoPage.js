@@ -1,4 +1,6 @@
 class MovimentacaoPage {
+  url = "/portal_service/reports/index";
+
   get selectArea() {
     return cy.get('[name="area_name"]');
   }
