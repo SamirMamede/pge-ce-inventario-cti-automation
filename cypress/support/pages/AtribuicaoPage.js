@@ -1,4 +1,6 @@
 class AtribuicaoPage {
+  url = "/portal_service/bonds";
+
   get selectArea() {
     return cy.get('[name="bond[area]"]');
   }
@@ -89,6 +91,10 @@ class AtribuicaoPage {
 
   get btnFecharModal() {
     return cy.get('#generate_term button[data-dismiss="modal"]');
+  }
+
+  acessarTela() {
+    cy.visit(this.url);
   }
 
   preencherInformacoesBasicas(dados) {
