@@ -1,4 +1,4 @@
-Feature: Asset Assignment Editing
+Feature: Edição de Atribuições de Ativos
 
   Background:
     Given que estou autenticado no sistema

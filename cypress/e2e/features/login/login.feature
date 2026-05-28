@@ -1,4 +1,4 @@
-Feature: Login
+Feature: Autenticação
 
   Scenario: Login com sucesso
     Given que acesso a página de login
