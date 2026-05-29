@@ -6,26 +6,37 @@ Este projeto consiste em uma suíte de testes automatizados de ponta a ponta (E2
 
 ## 🛠️ Tecnologias
 
-As seguintes ferramentas foram utilizadas na construção do projeto:
+As seguintes ferramentas e tecnologias foram utilizadas na construção do projeto:
 
-- **Framework:** [Cypress](https://www.cypress.io/)
+- **Framework de Automação:** [Cypress](https://www.cypress.io/)
+- **BDD Framework:** [Cucumber](https://cucumber.io/)
+- **Pré-processador BDD:** [@badeball/cypress-cucumber-preprocessor](https://github.com/badeball/cypress-cucumber-preprocessor)
 - **Linguagem:** [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- **Arquitetura:** Page Object Model (POM)
+- **Sintaxe BDD:** Gherkin
 - **Ambiente de Execução:** [Node.js](https://nodejs.org/)
+
+---
 
 ## 🏗️ Arquitetura
 
-O projeto foi estruturado utilizando o padrão Page Object Model (POM), visando maior reutilização, legibilidade e manutenibilidade dos testes automatizados.
+O projeto foi estruturado utilizando os padrões **Page Object Model (POM)** e **Behavior Driven Development (BDD)**, visando maior reutilização, legibilidade, escalabilidade e manutenibilidade dos testes automatizados.
 
 ## 📂 Estrutura do Projeto
 
 ```text
-├── cypress/
-│   ├── e2e/             # Cenários de teste
-│   ├── support/
-│   │   ├── pages/       # Classes com os elementos e ações
-│   ├── fixtures/        # Massas de dados para os testes
-├── docs/                # Plano de Teste
-└── cypress.config.js    # Configurações globais do framework
+cypress/
+├── e2e/
+│   ├── features/
+│   │   ├── login/
+│   │   ├── reports/
+│   │   ├── responsibilities/
+│   │   └── terms/
+├── fixtures/
+├── support/
+│   ├── pages/
+│   ├── commands.js
+│   └── e2e.js
 ```
 
 ## 🛠️ Pré-requisitos

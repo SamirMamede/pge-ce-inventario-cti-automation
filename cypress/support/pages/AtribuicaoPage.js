@@ -1,4 +1,8 @@
 class AtribuicaoPage {
+  url = "/portal_service/bonds";
+
+  urlNovoCadastro = "/portal_service/bonds/new";
+
   get selectArea() {
     return cy.get('[name="bond[area]"]');
   }
@@ -89,6 +93,14 @@ class AtribuicaoPage {
 
   get btnFecharModal() {
     return cy.get('#generate_term button[data-dismiss="modal"]');
+  }
+
+  acessarTela() {
+    cy.visit(this.url);
+  }
+
+  acessarTelaCadastro() {
+    cy.visit(this.urlNovoCadastro);
   }
 
   preencherInformacoesBasicas(dados) {

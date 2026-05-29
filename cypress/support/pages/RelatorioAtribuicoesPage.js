@@ -1,4 +1,6 @@
 class RelatorioAtribuicoesPage {
+  url = "/portal_service/reports/assignments_by_area";
+
   get radioSintetico() {
     return cy.get("#type_syntetic");
   }
