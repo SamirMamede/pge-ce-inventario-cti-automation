@@ -95,7 +95,7 @@ Then("devo conseguir gerar o relatório PDF analítico", () => {
 
   const dataAtual = new Date();
 
-  const dia = dataAtual.getDate();
+  const dia = String(dataAtual.getDate()).padStart(2, "0");
 
   const ano = dataAtual.getFullYear();
 
